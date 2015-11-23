@@ -4,14 +4,16 @@ var infoWindow
 var gLatLng
 var name
 var description
-var input = "<table>" +
-    "<tr><td>Name:</td> <td><input type='text' id='name'/> </td> </tr>" +
-    "<tr><td>Description:</td> <td><input type='text' id='description'/></td> </tr>" +
-    "<tr><td></td><td><input type='button' value='Save & Close' onclick='saveData()'/></td></tr>";
-
-var info  = "<table>" +
-    "<tr><td>Name:</td> <td id='name'><% name %></td></tr>" +
-    "<tr><td>Description:</td> <td id='description'><% description %></td></tr>";
+var newEventInfo =
+    "<div class=\"input-group\">" +
+    "<span class=\"input-group-addon\" id=\"event-name\">Name: </span>" +
+    "<input type=\"text\" class=\"form-control\" placeholder=\"Name the event\" aria-describedby=\"basic-addon1\">" +
+    "</div>" +
+    "<div class=\"input-group\">" +
+    "<span class=\"input-group-addon\" id=\"event-description\">Description: </span>" +
+    "<input type=\"text\" class=\"form-control\" placeholder=\"Describe the event\" aria-describedby=\"basic-addon1\">" +
+    "</div>" +
+    "<button id=\"create-event\" type=\"button\" class=\"btn btn-primary\">Create!</button>";
 
 function initialize() {
     var mapOptions = {
@@ -36,7 +38,7 @@ function createEvent(latLng, map) {
     var lng = latLng.lng();
 
     infoWindow = new google.maps.InfoWindow({
-        content: input
+        content: newEventInfo
     });
 
     openWindow(latLng);
@@ -58,6 +60,11 @@ function viewWindow(location) {
     loadContent(infoWindow, location);
     infoWindow.setPosition(location);
     infoWindow.open(map);
+}
+
+// Saves data to the DB to create the event
+function saveAndClose() {
+
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
