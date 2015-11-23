@@ -24,10 +24,6 @@ function initialize() {
     map = new google.maps.Map(document.getElementById('map-canvas'),
         mapOptions);
 
-    eventsCollection = new EventsCollection();
-    eventsCollection.on('sync', function(collection) {
-        plotExistingPoints(collection);
-    });
 
     map.addListener('click', function(e) {
         createEvent(e.latLng, map);
@@ -55,20 +51,6 @@ function createEvent(latLng, map) {
 
 }
 
-function saveData() {
-    var name = escape(document.getElementById("name").value);
-    var description = escape(document.getElementById("description").value);
-
-    eventsCollection.create({
-        name: name,
-        description: description,
-        lat: gLatLng.lat(),
-        lng: gLatLng.lng(),
-        owner: "me"
-    })
-
-    closeWindow(gLatLng);
-}
 
 function closeWindow(location) {
     infoWindow.close(map);
@@ -85,44 +67,6 @@ function viewWindow(location) {
     loadContent(infoWindow, location);
     infoWindow.setPosition(location);
     infoWindow.open(map);
-}
-
-// Initializes the data used for map display windows
-function loadContent(infowindow, location) {
-
-    var lat = location.lat();
-    var lng = location.lng();
-
-    var currentEvent = eventsCollection.findWhere({
-        lat: lat,
-        lng: lng
-    });
-
-    name = currentEvent.get('name');
-    description = currentEvent.get('description');
-
-}
-
-function plotExistingPoints(collection) {
-    collection.each(function(currentEvent) {
-
-        var pos = new google.maps.LatLng(currentEvent.get('lat'),
-            currentEvent.get('lng'));
-
-        var marker = new google.maps.Marker({
-            map: map,
-            position: pos,
-            animation: google.maps.Animation.DROP
-        });
-
-        google.maps.event.addListener(marker, 'click', function(event) {
-            viewWindow(event.latLng);
-        });
-
-        infoWindow = new google.maps.InfoWindow({
-            content: info
-        });
-    });
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
