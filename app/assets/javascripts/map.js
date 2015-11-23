@@ -35,20 +35,11 @@ function createEvent(latLng, map) {
     var lat = latLng.lat();
     var lng = latLng.lng();
 
-    var marker = new google.maps.Marker({
-        position: latLng,
-        map: map,
-        animation: google.maps.Animation.DROP
-    });
-
     infoWindow = new google.maps.InfoWindow({
         content: input
     });
 
-    gLatLng = latLng;
-
     openWindow(latLng);
-
 }
 
 
