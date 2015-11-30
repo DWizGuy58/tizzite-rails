@@ -46,3 +46,11 @@ group :development, :test do
   gem 'spring'
 end
 
+gem 'apipie-rails'
+
+gem 'cancancan'
+
+gem 'rabl'
+
+gem 'devise'
+gem 'omniauth-facebook'
