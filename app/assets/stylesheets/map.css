@@ -25,3 +25,7 @@ html, body {
 #create-event {
     margin-left: 40%;
 }
+
+.gm-style-iw + div {
+    display: none;
+}
