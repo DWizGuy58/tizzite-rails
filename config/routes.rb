@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   apipie
 
-  root to: 'home#index'
+  root 'pages#map'
 
   # resources :users
   devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks' }

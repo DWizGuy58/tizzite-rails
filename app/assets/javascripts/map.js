@@ -31,7 +31,6 @@ function initialize() {
             createEvent(e.latLng, map);
         }
     });
-
 }
 
 // Creates a new event
