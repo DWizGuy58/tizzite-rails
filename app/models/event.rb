@@ -7,5 +7,6 @@ class Event < ActiveRecord::Base
   validates_presence_of :name, :lat, :lon
 
   belongs_to :owner, :class_name => 'User'
+  has_many :attendees, :class_name => 'User'
   has_many :messages
 end
