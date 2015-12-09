@@ -34,10 +34,7 @@ function initialize() {
 }
 
 // Creates a new event
-function createEvent(latLng, map) {
-
-    var lat = latLng.lat();
-    var lng = latLng.lng();
+function createEvent(latLng) {
 
     infoWindow = new google.maps.InfoWindow({
         content: newEventInfo,
@@ -69,8 +66,14 @@ function viewWindow(location) {
 }
 
 // Saves data to the DB to create the event
-function saveAndClose(latLng) {
-    //do some other stuff to save data
+function saveAndClose(latLng, map) {
+
+    var marker = new google.maps.Marker({
+        position: latLng,
+        map: map,
+        animation: google.maps.Animation.DROP
+    });
+
     closeWindow(latLng);
 }
 
