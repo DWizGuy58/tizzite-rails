@@ -9,8 +9,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :uid
 
   has_many :owned_events, :class_name => 'Event', :foreign_key => 'owner_id', :dependent => :destroy
-  has_many :requested_events, :class_name => 'Event'
-  has_many :joined_events, :class_name => 'Event'
+  has_many :requested_events, :class_name => 'Event', :inverse_of => :requesters
+  has_many :joined_events, :class_name => 'Event', :inverse_of => :attendees
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

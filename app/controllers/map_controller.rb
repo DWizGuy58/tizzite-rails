@@ -1,4 +1,0 @@
-class MapController < ApplicationController
-
-
-end
